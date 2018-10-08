@@ -1,2 +1,4 @@
 # Soundwave
-Fullstack app, frontend: react-redux, backend: ruby on rails
+__Fullstack app__
+_frontend:_ react-redux
+_backend:_ ruby on rails
