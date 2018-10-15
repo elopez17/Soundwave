@@ -1,0 +1,41 @@
+
+.signin-email-form {
+  width: 450px;
+  height: 600px;
+  display: grid;
+  grid-template-columns: 450px;
+  grid-template-rows: 300px 300px;
+  grid-gap: 20px;
+}
+
+.signin-email-inp {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 7px 8px;
+  /* display: block; */
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  color: #555;
+}
+
+.signin-email-submit {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+}
+
+.signin-email-agreements {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 16px;
+}

@@ -1,0 +1,32 @@
+
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  background-color: rgba(242,242,242,.9);
+  z-index: 10;
+}
+
+.modal-child {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 450px;
+  height: 600px;
+  animation: animatetop 0.4s
+}
+
+@keyframes animatetop {
+  from {
+    top:-1800px;
+  }
+  to {
+    top:0;
+  }
+}
