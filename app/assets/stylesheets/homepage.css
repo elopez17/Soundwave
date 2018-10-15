@@ -1,12 +1,12 @@
 .homepage-logo {
-  background: url('rainy.png') no-repeat 28px 15px;
+  background: image-url('rainy.png') no-repeat 28px 15px;
   background-size: 43px 37px;
   margin: 0;
   padding: 20px 20px;
   text-indent: 4em;
   color: white;
   font-family: sans-serif;
-  /* background-color: green; */
+  background-color: green;
   grid-column: 1;
   grid-row: 1;
   justify-self: start;
