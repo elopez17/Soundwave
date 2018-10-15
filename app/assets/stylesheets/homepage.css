@@ -1,5 +1,5 @@
 .homepage-logo {
-  background: image-url('rainy.png') no-repeat 28px 15px;
+  background: url('rainy.png') no-repeat 28px 15px;
   background-size: 43px 37px;
   margin: 0;
   padding: 20px 20px;
