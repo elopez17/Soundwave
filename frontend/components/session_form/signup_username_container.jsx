@@ -64,15 +64,14 @@ class SignupUsernameForm extends React.Component {
 
   render(){
     return (
-    <div>
-      <form>
-        <label>Choose your display name*
-          <input onChange={this.updateField('username')} type='text' value={this.state.username} />
-        </label>
-        {this.props.errors[0]}
-        <button className="signin-form-btn" onClick={this.handleSubmit}>Get started</button>
-      </form>
-    </div>
+  <form className="signup-username-form">
+    <h1 className="signup-username-header">Tell us a bit<br/>about yourself</h1>
+    <div className="signup-username-title">Choose your display name<span className="color-orange">*</span></div>
+    <input className="signup-username-inp" onChange={this.updateField('username')} type='text' value={this.state.username} />
+    <div className="signup-username-errors">{this.props.errors[0]}</div>
+    <div className="signup-username-info">Your display name can be anything you like. Your name or artist<br/>name are good choices.</div>
+    <button className="signup-username-submit continue-btn" onClick={this.handleSubmit}>Get started</button>
+  </form>
     );
   }
 }

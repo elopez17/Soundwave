@@ -50,15 +50,15 @@ class SigninForm extends React.Component {
       <div className="line-through"></div>
       <form className="signin-email-form">
         <input className="signin-email-inp" onChange={this.updateField('email')} type='text' value={this.state.email} placeholder="Your email address"/>
-        {this.props.errors[0]}
+        <div className="signin-email-errors">{this.props.errors[0]}</div>
         <button className="continue-btn signin-email-submit" onClick={this.handleSubmit}>Continue</button>
-          <div className="signin-email-agreements">We may use your email and devices for updates and tips on<br/>
+        <div className="signin-email-agreements">We may use your email and devices for updates and tips on<br/>
         Soundwave's products and services, and for activities notifications.<br/>
-      You can unsubscribe for free at any time in your notification<br/>
-          settings.<br/><br/>
+        You can unsubscribe for free at any time in your notification<br/>
+        settings.<br/><br/>
 
         We may use information you provide us in order to show you<br/>
-      targeted ads as described in our Privacy Policy.</div>
+        targeted ads as described in our Privacy Policy.</div>
       </form>
     </div>
     );

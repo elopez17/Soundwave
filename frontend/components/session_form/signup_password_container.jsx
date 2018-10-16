@@ -49,16 +49,23 @@ class SignupPasswordForm extends React.Component {
 
   render(){
     return (
-    <div>
-      <form>
-        <input readOnly onClick={() => this.props.openModal({ email: this.state.email, modal: 'signup' })} type='text' value={this.state.email} />
-        <label>Choose a password*
-          <input onChange={this.updateField('password')} type='password' value={this.state.password} />
-        </label>
-        {this.props.errors[0]}
-        <button className="signin-form-btn" onClick={this.handleSubmit}>Accept & continue</button>
+      <form className="signup-password-form">
+        <h1 className="signup-header">Create your Soundwave<br/>account</h1>
+        <input readOnly className="signup-password-email" onClick={() => this.props.openModal({ email: this.state.email, modal: 'signup' })} type='text' value={this.state.email} />
+        <div className="password-label">Choose a password<span className="color-orange">*</span></div>
+        <input className="signup-password-inp" onChange={this.updateField('password')} type='password' value={this.state.password} />
+        <div className="signup-password-errors">{this.props.errors[0]}</div>
+        <div className="signup-validation">
+          <input className="checkbox" type="checkbox"/>
+          <span className="robo-txt">I'm not a robot</span>
+          <img className="recaptcha-img" src="/recaptcha.png" />
+        </div>
+        <div className="terms-of-use">
+          By signing up I accept the Terms of Use. I have read and understood<br/>
+          the Privacy Policy and Cookies Policy.
+        </div>
+        <button className="signup-password-submit continue-btn" onClick={this.handleSubmit}>Accept & continue</button>
       </form>
-    </div>
     );
   }
 }

@@ -32,8 +32,17 @@ class SignupPersonalForm extends React.Component {
 
   updateField(field){
     return (e) => {
+      let value;
+      if (field === 'age') {
+        value = parseInt(e.target.value, 10);
+        if (isNaN(value)) {
+          value = 0;
+        }
+      } else {
+        value = e.target.value;
+      }
       this.setState({
-      [field]: (field === 'age' ? parseInt(e.target.value === '' ? '0' : e.target.value, 10) : e.target.value)
+      [field]: value
       });
     };
   }
@@ -59,18 +68,15 @@ class SignupPersonalForm extends React.Component {
 
   render(){
     return (
-    <div>
-      <form>
-        <label>Tell us your age*
-          <input onChange={this.updateField('age')} type='text' value={this.state.age.toString()} />
-        </label>
-        {this.props.errors[0]}
-        <label>Gender
-          <input onChange={this.updateField('gender')} type='text' value={this.state.gender} placeholder="Indicate your gender" />
-        </label>
-        <button className="signin-form-btn" onClick={this.handleSubmit}>Continue</button>
-      </form>
-    </div>
+  <form className="personal-form">
+    <h1 className="personal-header">Create your Soundwave<br/>account</h1>
+    <div className="age-title">Tell us your age<span className="color-orange">*</span></div>
+    <input className="personal-age-inp" onChange={this.updateField('age')} type='text' value={this.state.age.toString()} />
+    <div className="personal-age-errors">{this.props.errors[0]}</div>
+    <div className="gender-title">Gender<span className="color-orange">*</span></div>
+    <input className="personal-gender-inp" onChange={this.updateField('gender')} type='text' value={this.state.gender} placeholder="Indicate your gender" />
+    <button className="personal-form-btn continue-btn" onClick={this.handleSubmit}>Continue</button>
+  </form>
     );
   }
 }

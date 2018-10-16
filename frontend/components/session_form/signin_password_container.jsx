@@ -25,6 +25,7 @@ class SigninPasswordForm extends React.Component {
     this.state = { email: props.email, password: ''};
     this.updateField.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.goToEmailForm = this.goToEmailForm.bind(this);
   }
 
   updateField(field){
@@ -48,12 +49,17 @@ class SigninPasswordForm extends React.Component {
     }
   }
 
+  goToEmailForm(){
+    this.props.clearErrors();
+    this.props.openModal({ email: this.state.email, modal: 'signin' });
+  }
+
   render(){
     return (
       <form className="signin-password-form">
-        <input readOnly className="signin-password-email" onClick={() => this.props.openModal({ email: this.state.email, modal: 'signin' })} type='text' value={this.state.email} />
+        <input readOnly className="signin-password-email" onClick={this.goToEmailForm} type='text' value={this.state.email} />
         <input className="signin-password-inp" onChange={this.updateField('password')} type='password' value={this.state.password} placeholder="Your Password *" />
-        {this.props.errors[0]}
+        <div className="signin-password-errors">{this.props.errors[0]}</div>
         <button className="signin-password-submit" onClick={this.handleSubmit}>Sign in</button>
       </form>
     );
