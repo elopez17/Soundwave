@@ -17,8 +17,7 @@ class Header extends React.Component {
   }
 
   render(){
-    if (!this.props.currentUser ||
-        this.props.location.pathname === '/') {
+    if (!this.props.currentUser) {
       return null;
     }
     return (

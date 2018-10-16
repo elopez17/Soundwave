@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 
- // TESTING
-import { login, logout, signup } from './util/session_api_util';
-
 document.addEventListener('DOMContentLoaded', () => {
   let store;
 
@@ -23,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const root = document.getElementById('root');
+
+  //FOR TESTING
+  window.getState = store.getState;// TESTING
+  //FOR TESTING
 
   ReactDOM.render(<Root store={store}/>, root);
 });

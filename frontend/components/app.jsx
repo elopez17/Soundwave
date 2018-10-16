@@ -12,13 +12,14 @@ import HomepageContainer from './home/homepage_container';
 import Modal from './modal/modal';
 import UserPageContainer from './user/user_page_container';
 import HeaderBar from './header/header';
+import { ProtectedRoute, AuthRoute } from '../util/route_util';
 
 const App = () => (
   <div>
     <Modal />
     <HeaderBar />
       <Switch>
-        <Route exact path='/' component={HomepageContainer}/>
+        <AuthRoute exact path='/' component={HomepageContainer}/>
         <Route exact path='/users/:userId' component={UserPageContainer} />
         <Redirect to='/' />
       </Switch>
