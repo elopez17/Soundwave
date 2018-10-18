@@ -1,3 +1,77 @@
 // Place all the styles related to the api/users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.user-show-page {
+  width: 1250px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.user-show-header {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-row: 240px;
+  width: 100%;
+  height: 240px;
+  background: linear-gradient(315deg, rgb(142, 132, 133) 0%, rgb(230, 132, 110) 100%);
+}
+
+.user-show-username {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  justify-self: start;
+  margin-top: 25px;
+  padding: 10px 8px;
+  font-family: sans-serif;
+  font-size: 26px;
+  background: black;
+  color: white;
+}
+
+.user-show-grid-container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 50px auto;
+  width: 100%;
+}
+
+.user-show-tabs {
+  grid-column: 1/3;
+  grid-row: 1;
+  color: #f50;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 400px;
+  margin: 0 30px;
+  padding: auto 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-show-tab {
+  display: inline-block;
+  height: 100%;
+  line-height: 50px;
+  vertical-align: middle;
+  padding-right: 30px;
+}
+
+.user-show-tracks {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 0 30px;
+  margin: 20px 0;
+  // background-color: grey;
+  border-right: 1px solid #ccc;
+}
+
+.user-show-sidebar {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 0 30px;
+  margin: 20px 0;
+  border-left: 1px solid #ccc;
+  // background-color: coral;
+}

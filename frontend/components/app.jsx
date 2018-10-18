@@ -15,14 +15,14 @@ import HeaderBar from './header/header';
 import { ProtectedRoute, AuthRoute } from '../util/route_util';
 
 const App = () => (
-  <div>
+  <div className="App">
     <Modal />
     <HeaderBar />
-      <Switch>
-        <AuthRoute exact path='/' component={HomepageContainer}/>
-        <Route exact path='/users/:userId' component={UserPageContainer} />
-        <Redirect to='/' />
-      </Switch>
+    <Switch>
+      <AuthRoute exact path='/' component={HomepageContainer}/>
+      <Route exact path='/users/:userId' component={UserPageContainer} />
+      <Redirect to='/' />
+    </Switch>
   </div>
 );
 
