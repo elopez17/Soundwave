@@ -54,3 +54,9 @@ const Modal = ({ modal, closeModal, clearErrors }) => {
   );
 };
 ```
+
+
+#### Future product development
+* users can follow other users
+* users can publish and stream songs
+* users can comment on songs
