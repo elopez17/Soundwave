@@ -6,4 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(username: 'demo', email: 'demo@demo.com', password: 'password123');
+User.destroy_all
+Song.destroy_all
+Comment.destroy_all
+
+demo = User.create(username: 'demo', email: 'demo@demo.com', password: 'password123');
+
+song1 = Song.create(user_id: demo.id, genre: 'jazz', name: 'tomorrow')

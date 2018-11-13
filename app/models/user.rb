@@ -4,6 +4,16 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
+  has_many :songs,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: :Song
+
+  has_many :comments,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: :Comment
+
   after_initialize :ensure_session_token
   attr_reader :password
 

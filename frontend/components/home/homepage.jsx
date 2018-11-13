@@ -10,17 +10,20 @@ class Homepage extends React.Component {
 
   componentDidMount(){
     let slideIndex = 0;
+    let slides = document.getElementsByClassName("mySlides");
+    let slideTexts = document.getElementsByClassName("slideText");
 
     const carousel = () => {
       let i;
-      let x = document.getElementsByClassName("mySlides");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        slideTexts[i].style.display = "none";
       }
       slideIndex++;
-      if (slideIndex > x.length) {slideIndex = 1}
-      x[slideIndex-1].style.display = "block";
-      this.setState({id: setTimeout(carousel, 5000)}); // Change image every 2 seconds
+      if (slideIndex > slides.length) {slideIndex = 1}
+      slides[slideIndex-1].style.display = "block";
+      slideTexts[slideIndex-1].style.display = "block";
+      this.setState({id: setTimeout(carousel, 6000)});
     }
     carousel();
   }
@@ -39,6 +42,7 @@ class Homepage extends React.Component {
 
   render() {
     return (
+      <div id="homepage-container">
         <div className="homepage-content">
           <img className="mySlides w3-animate-right" src="/intro_pic_2.jpg" />
           <img className="mySlides w3-animate-right" src="/intro_pic_1.jpg" />
@@ -48,7 +52,15 @@ class Homepage extends React.Component {
             <button className="homepage-create-btn" onClick={() => this.props.openModal({modal: 'signup', email: ''})}>Create account</button>
             <button className="homepage-demo-btn" onClick={this.handleDemo}>Demo</button>
           </div>
+          <p className="slideText"><h1>What's next in music is first on Soundwave</h1>
+Post your first track and launch your career as an artist. Soundwave is a<br></br>
+platform where you can create, grow your audience, and make connections with other<br></br>
+artists.</p>
+          <p className="slideText"><h1>Discover more with Soundwave</h1>
+            Soundwave lets you listen to a variety of genres<br></br>
+            The library of music is growing, contribute and share your music here!<br></br></p>
         </div>
+      </div>
     );
   }
 }
