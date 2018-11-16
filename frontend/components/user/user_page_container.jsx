@@ -14,19 +14,27 @@ const mdp = (dispatch) => ({
 class UserPageContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {user: {username: '', photoFile: null}};
+    this.state = {user: {id: null, username: '', photoURL: '', photoFile: null}};
     this.getFile = this.getFile.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchUser(this.props.match.params.userId)
-    .then(res => this.setState({user: res.user}));
+      .then(res => this.setState({user: res.user}));
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (nextState.user.id !== this.state.user.id ||
+      nextState.user.photoURL !== this.state.user.photoURL) {
+      return true;
+    }
+    return false;
   }
 
   componentDidUpdate(prevProps){
     if (prevProps.match.params.userId !== this.props.match.params.userId) {
       this.props.fetchUser(this.props.match.params.userId)
-      .then(res => this.setState({user: res.user}));
+        .then(res => this.setState({user: res.user}));
     }
   }
 
@@ -37,18 +45,10 @@ class UserPageContainer extends React.Component {
     return null;
   }
 
-  uploadPicForm(){
-    return (e) => {
-      e.preventDefault();
-      <input type="file" />
-    };
-  }
-
   getFile(){
     return (e) => {
       const reader = new FileReader();
       const file = e.currentTarget.files[0];
-      reader.onloadend = () => this.setState({photoURL: reader.result, photoFile: file})
       if (file) {
         reader.readAsDataURL(file);
         const formData = new FormData();
@@ -59,7 +59,7 @@ class UserPageContainer extends React.Component {
           data: formData,
           contentType: false,
           processData: false
-        }).then(res=> this.props.fetchUser(this.props.sessionId));
+        }).then(res => this.props.fetchUser(this.props.sessionId).then(res => this.setState({ user: res.user })));
       } else {
         this.setState({photoURL: '', photoFile: null});
       }
