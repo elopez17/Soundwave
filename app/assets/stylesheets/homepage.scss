@@ -49,7 +49,9 @@
 .homepage-create-btn {
   grid-row: 1;
   grid-column: 2;
-  padding: 5px 16px;
+  justify-self: center;
+  align-self: center;
+  padding: 5px 18px 5px 18px;
   margin: 0 0 0 6px;
   background-color: #f50;
   color: white;
@@ -85,7 +87,7 @@
   line-height: 1.5;
   font-size: 18px;
   font-weight: 100;
-  animation: animateright 1.0s
+  animation: animateright 1.0s;
 }
 .slideText h1 {
   font-weight: 100;
@@ -107,15 +109,23 @@
 
 #homepage-container {
   width: 1225px;
-  height: 100vh;
   margin: 0 auto;
   padding: 0;
   background-color: white;
 }
 
+.homepage--search--icon {
+  margin-top: 65px;
+  margin-left: 200px;
+}
+
 @media (max-width: 1224px) {
   #homepage-container {
     width: 1080px;
+  }
+
+  .homepage--search--icon {
+    margin-left: 130px;
   }
 }
 
@@ -123,6 +133,68 @@
       #homepage-container {
         width: 960px;
       }
+
+      .homepage--search--icon {
+        margin-left: 75px;
+      }
+}
+
+.homepage-search-bar {
+  height: 46px;
+  width: 600px;
+  padding-left: 20px;
+  position: relative;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  font-size: 16px;
+  border: none;
+}
+
+.search__icon {
+  position: absolute;
+  clip: rect(0px, 90px, 30px, 60px);
+}
+
+.play__icon {
+  position: absolute;
+  clip-path: circle(28px at 287px 350px);
+  z-index: 3;
+}
+
+.homepage__songs__title {
+  position: relative;
+  top: 100px;
+  text-align: center;
+  font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
+  font-size: 24px;
+  font-weight: 100;
+}
+
+.songs__grid {
+  display: grid;
+  margin: 130px 30px 0px;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(6, 1fr);
+  grid-row-gap: 80px;
+  grid-column-gap: 10px;
+}
+
+.song__item {
+  width: 180px;
+  height: 180px;
+  background-color: lightgrey;
+}
+
+.song__item:hover {
+  cursor: pointer;
+  background-image: radial-gradient(circle,orange,blue);
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+  background-position: 50%, 50%;
+  z-index: 1;
 }
 
 .mySlides {
@@ -131,7 +203,7 @@
   z-index: 0;
   grid-column: 1/3;
   grid-row: 1/2;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .w3-animate-right {

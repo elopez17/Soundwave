@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HomepageSongs from './homepage_songs';
 
 class Homepage extends React.Component {
   constructor(props){
@@ -60,6 +61,10 @@ artists.</p>
             Soundwave lets you listen to a variety of genres<br></br>
             The library of music is growing, contribute and share your music here!<br></br></p>
         </div>
+        <input className="homepage-search-bar" type="text" placeholder="Search for artists, bands, tracks" />
+        <img className="search__icon homepage--search--icon" src="/sprite-sheet.png"/>
+        <div className="homepage__songs__title">Hear the best from the Soundwave community</div>
+        <HomepageSongs/>
       </div>
     );
   }

@@ -25,6 +25,7 @@ class UserPageContainer extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextState.user.id !== this.state.user.id ||
+      nextProps.match.params.userId !== this.props.match.params.userId ||
       nextState.user.photoURL !== this.state.user.photoURL) {
       return true;
     }

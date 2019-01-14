@@ -7,6 +7,7 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.1'
 gem 'rake'
 gem "aws-sdk-s3"
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
