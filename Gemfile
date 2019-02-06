@@ -6,6 +6,7 @@ ruby '2.5.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 gem 'rake'
+gem 'paperclip'
 gem "aws-sdk-s3"
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # Use postgresql as the database for Active Record

@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSong } from "../../actions/song_actions";
+import { 
+  fetchSong,
+  fetchSongs
+ } from "../../actions/song_actions";
 import { playSong } from '../../actions/player_actions';
 
 const msp = (state, ownProps) => ({
@@ -8,6 +11,7 @@ const msp = (state, ownProps) => ({
 });
 
 const mdp = (dispatch) => ({
+  fetchSongs: () => dispatch(fetchSongs()),
   fetchSong: (songId) => dispatch(fetchSong(songId)),
   playSong: (audio) => dispatch(playSong(audio)),
 });
@@ -19,24 +23,22 @@ class HomepageSongs extends React.Component {
 
   componentDidMount(){
     if (Object.keys(this.props.songs).length === 0){
-      this.props.fetchSong(3)
+      this.props.fetchSongs()
         .then(res => console.log(this.props.songs));
     }
   }
 
   render(){
-    console.log("render")
+    let songItems = [];
     let songImg = null;
-    let id = null;
-    if (Object.keys(this.props.songs).length > 0){
-      id = Object.keys(this.props.songs)[0];
-      songImg = <img style={{width:"180px", height:"180px"}} src={this.props.songs[id].photoURL} />
-    } else {
+    let ids = Object.keys(this.props.songs);
+    
+    if (ids.length < 12){
       return null;
     }
-    let songItems = [];
     for (let i=0; i < 12; i++){
-      songItems.push(<div key={i} onClick={() => this.props.playSong(this.props.songs[id].audio)} className="song__item">{songImg}{this.props.songs[id].name}<br />{this.props.songs[id].username}</div>);
+      songImg = <img style={{width:"180px", height:"180px"}} src={this.props.songs[ids[i]].photoURL} />
+      songItems.push(<div key={i} onClick={() => this.props.playSong(this.props.songs[ids[i]].audio)} className="song__item">{songImg}{this.props.songs[ids[i]].name}</div>);
     }
     return (
       <div className="songs__grid">
