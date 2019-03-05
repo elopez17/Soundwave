@@ -103,8 +103,7 @@ class Homepage extends React.Component {
         />
         <img
           className="search__icon homepage--search--icon"
-          src="/sprite-sheet.png"
-        />
+          src="/sprite-sheet.png" />
         <div className="homepage__songs__title">
           Hear the best from the Soundwave community
         </div>

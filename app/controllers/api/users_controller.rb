@@ -1,4 +1,17 @@
 class Api::UsersController < ApplicationController
+  def index
+    if params[:user_ids]
+      @users = User.find(params[:user_ids])
+    else
+      @users = User.all()
+    end
+    if @users
+      render "api/users/index"
+    else
+      render json: ['users not found'], status: 404
+    end
+  end
+  
   def create
     @user = User.new(user_params)
     if @user.save

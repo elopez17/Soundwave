@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: <%= Rails.application.credentials.cloudinary[:cloud_name] %>
+  api_key: <%= Rails.application.credentials.cloudinary[:access_key] %>
+  api_secret: <%= Rails.application.credentials.cloudinary[:secret_access_key] %>
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: <%= Rails.application.credentials.cloudinary[:cloud_name] %>
+  api_key: <%= Rails.application.credentials.cloudinary[:access_key] %>
+  api_secret: <%= Rails.application.credentials.cloudinary[:secret_access_key] %>
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: <%= Rails.application.credentials.cloudinary[:cloud_name] %>
+  api_key: <%= Rails.application.credentials.cloudinary[:access_key] %>
+  api_secret: <%= Rails.application.credentials.cloudinary[:secret_access_key] %>
+  enhance_image_tag: true
+  static_file_support: false

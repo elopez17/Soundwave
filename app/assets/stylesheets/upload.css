@@ -1,0 +1,251 @@
+.song_upload_page {
+  width: 1240px;
+  height: fit-content;
+  min-height: calc(100% - 45px);
+  margin: 0 auto;
+  padding-top: 1px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+@media (max-width: 1239px) {
+  .song_upload_page {
+    width: 1080px;
+  }
+}
+
+@media (max-width: 1079px) {
+  .song_upload_page {
+    width: 960px;
+  }
+}
+
+.upload_box {
+  width: 800px;
+  height: 350px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  border: 1px solid #f2f2f2;
+  border-radius: 2px;
+  margin: 150px auto;
+}
+
+.soundwave_img {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  width: 700px;
+  height: 200px;
+}
+
+.upload_text {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  font-size: 12px;
+}
+
+.upload_btn {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  width: 290px;
+  height: 40px;
+  box-sizing: border-box;
+  padding-top: 10px;
+  text-align: center;
+  background-color: #f50;
+  color: white;
+  font-size: 16px;
+  font-weight: 100;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.song_form {
+  width: 800px;
+  box-sizing: border-box;
+  margin: 0px auto 200px;
+  border: 1px solid #f2f2f2;
+  border-radius: 0px 0px 2px 2px;
+}
+
+.blue_bar {
+  display: inline-block;
+  width: 398px;
+  height: 5px;
+  margin-right: 1px;
+  background-color: #06c;
+  box-sizing: border-box;
+}
+
+.orange_bar {
+  display: inline-block;
+  width: 399px;
+  height: 5px;
+  background-color: #f50;
+  box-sizing: border-box;
+}
+
+.song_basic_info {
+  width: fit-content;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 25px;
+  color: #f50;
+  font-size: 24px;
+  line-height: 1.6;
+  border-bottom: 1px solid #f50;
+  box-sizing: border-box;
+}
+
+.song_form_grid {
+  display: grid;
+  grid-template-columns: 300px auto;
+  grid-template-rows: auto;
+}
+
+.song_form_img {
+  grid-area: 1 / 1 / 2 / 2;
+  width: 260px;
+  height: 260px;
+  margin: 25px 15px 30px 25px;
+  background-image: linear-gradient(135deg, #846170, #70929c);
+}
+
+.song_photo_errors {
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: center;
+  align-self: end;
+  position: relative;
+  bottom: 8px;
+  color: #f50;
+  font-size: 12px;
+}
+
+.song_form_upload_img {
+  z-index: 1;
+  cursor: pointer;
+  text-align: center;
+  padding: 5px 12px;
+  height: 15px;
+  border-radius: 3px;
+  background-color: #eee;
+  font-weight: 100;
+  font-size: 12px;
+  position: relative;
+  top: 210px;
+  left: 25%;
+}
+
+.song_form_title {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+  top: 30px;
+  font-size: 12px;
+}
+
+.song_form_input {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+  align-self: start;
+  position: relative;
+  top: 50px;
+  width: 460px;
+  padding: 2px 7px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.song_title_errors {
+  grid-area: 1 / 2 / 2 / 3;
+  justify-self: start;
+  align-self: center;
+  position: relative;
+  bottom: 60px;
+  left: 10px;
+  color: #f50;
+  font-size: 12px;
+}
+
+.song_form_genre {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+  align-self: center;
+  font-size: 12px;
+}
+
+.song_form_select {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+  align-self: center;
+  position: relative;
+  top: 25px;
+  width: 190px;
+  padding-left: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.song_genre_errors {
+  grid-area: 1 / 2 / 2 / 3;
+  justify-self: start;
+  align-self: center;
+  position: relative;
+  left: 10px;
+  top: 60px;
+  color: #f50;
+  font-size: 12px;
+}
+
+.song_form_end {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 70px;
+  align-items: center;
+  border-top: 1px solid #f2f2f2;
+}
+
+.song_form_required {
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: start;
+  position: relative;
+  left: 30px;
+  font-size: 12px;
+}
+
+.song_form_cancel {
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: end;
+  padding: 3px 11px;
+  position: relative;
+  right: 80px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.song_form_save {
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: end;
+  padding: 3px 11px;
+  position: relative;
+  right: 25px;
+  font-size: 14px;
+  font-weight: 100;
+  background-color: #f50;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}

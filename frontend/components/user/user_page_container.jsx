@@ -1,42 +1,59 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
+import { fetchSongsByUser } from '../../actions/song_actions';
+import UserTracks from './user_tracks.jsx'
+import TracksGenre from './tracks_genre.jsx';
 
-const msp = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps) => ({
+  comments: state.entities.comments,
   users: state.entities.users,
   sessionId: state.session.id,
 });
 
-const mdp = (dispatch) => ({
-  fetchUser: (userId) => dispatch(fetchUser(userId)),
+const mapDispatchToProps = dispatch => ({
+  fetchUser: userId => dispatch(fetchUser(userId)),
+  fetchSongsByUser: userId => dispatch(fetchSongsByUser(userId)),
 });
 
 class UserPageContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {user: {id: null, username: '', photoURL: '', photoFile: null}};
+    this.state = {user: {id: null, username: '', songs: [], photoURL: '', photoFile: null}};
     this.getFile = this.getFile.bind(this);
   }
 
   componentDidMount(){
-    this.props.fetchUser(this.props.match.params.userId)
-      .then(res => this.setState({user: res.user}));
+    this.getUserInfo(this.props.match.params.userId);
   }
 
   shouldComponentUpdate(nextProps, nextState){
     if (nextState.user.id !== this.state.user.id ||
       nextProps.match.params.userId !== this.props.match.params.userId ||
-      nextState.user.photoURL !== this.state.user.photoURL) {
+      nextState.user.photoURL !== this.state.user.photoURL ||
+      nextProps.comments !== this.props.comments ||
+      nextState.user !== this.state.user) {
       return true;
     }
     return false;
   }
 
   componentDidUpdate(prevProps){
-    if (prevProps.match.params.userId !== this.props.match.params.userId) {
-      this.props.fetchUser(this.props.match.params.userId)
-        .then(res => this.setState({user: res.user}));
+    if (prevProps.match.params.userId !== this.props.match.params.userId ||
+      prevProps.comments !== this.props.comments) {
+      this.getUserInfo(this.props.match.params.userId);
     }
+  }
+
+  getUserInfo(userId){
+    this.props.fetchUser(userId)
+      .then(res => {
+        this.props.fetchSongsByUser(res.user.id)
+          .then(res2 => {
+            res.user.songs = Object.values(res2.songs);
+            this.setState({ user: res.user });
+          });
+      });
   }
 
   profilePic(photoURL){
@@ -90,11 +107,12 @@ class UserPageContainer extends React.Component {
       <div className="user-show-username">{this.state.user.username}</div>
     </div>
     <div className="user-show-grid-container">
-      <div className="user-show-tabs">
+      <div className="user-show-tabs text">
         <div className="user-show-tab">Tracks</div>
       </div>
-      <div className="user-show-tracks">My<br/>first track<br/>is<br/>coming soon</div>
-      <div className="user-show-sidebar"></div>
+      <div className="user_show_genre text">Genre</div>
+      <UserTracks username={this.state.user.username} songs={this.state.user.songs} userId={parseInt(this.props.match.params.userId, 10)}/>
+      <TracksGenre songs={this.state.user.songs} />
     </div>
   </div>
     );
@@ -102,4 +120,4 @@ class UserPageContainer extends React.Component {
 
 }
 
-export default connect(msp,mdp)(UserPageContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(UserPageContainer);

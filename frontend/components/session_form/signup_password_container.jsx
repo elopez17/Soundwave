@@ -5,12 +5,12 @@ import { closeModal, openModal } from '../../actions/modal_actions';
 import { receiveErrors, clearErrors } from '../../actions/session_actions';
 
 
-const msp = (state) => ({
+const mapStateToProps = (state) => ({
   errors: state.errors.session,
   formType: 'signup_password',
 });
 
-const mdp = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   openModal: (payload) => dispatch(openModal(payload)),
   closeModal: () => dispatch(closeModal()),
   receiveErrors: (errors) => dispatch(receiveErrors(errors)),
@@ -70,4 +70,4 @@ class SignupPasswordForm extends React.Component {
   }
 }
 
-export default withRouter(connect(msp, mdp)(SignupPasswordForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignupPasswordForm));

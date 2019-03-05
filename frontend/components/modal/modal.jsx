@@ -9,11 +9,11 @@ import SignupPasswordForm from '../session_form/signup_password_container';
 import SignupPersonalForm from '../session_form/signup_personal_container';
 import SignupUsernameForm from '../session_form/signup_username_container';
 
-const msp = (state) => ({
+const mapStateToProps = (state) => ({
   modal: state.ui.modal,
 });
 
-const mdp = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   closeModal: () => dispatch(closeModal()),
   clearErrors: () => dispatch(clearErrors()),
 });
@@ -57,4 +57,4 @@ const Modal = ({ modal, closeModal, clearErrors }) => {
   );
 };
 
-export default connect(msp, mdp)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

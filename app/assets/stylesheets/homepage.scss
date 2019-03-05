@@ -109,6 +109,8 @@
 
 #homepage-container {
   width: 1225px;
+  min-height: 100%;
+  height: fit-content;
   margin: 0 auto;
   padding: 0;
   background-color: white;
@@ -159,9 +161,23 @@
 }
 
 .play__icon {
-  position: absolute;
-  clip-path: circle(28px at 287px 350px);
-  z-index: 3;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-image: url('/sprite-sheet-orange.png');
+  background-position: -260px -326px;
+  background-repeat: no-repeat;
+}
+
+.pause_icon {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-image: url('/sprite-sheet-orange.png');
+  background-position: -309px -326px;
+  background-repeat: no-repeat;
 }
 
 .homepage__songs__title {
@@ -175,7 +191,7 @@
 
 .songs__grid {
   display: grid;
-  margin: 130px 30px 0px;
+  margin: 130px 30px;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: repeat(6, 1fr);
   grid-row-gap: 80px;
@@ -190,11 +206,57 @@
 
 .song__item:hover {
   cursor: pointer;
-  background-image: radial-gradient(circle,orange,blue);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  background-position: 50%, 50%;
-  z-index: 1;
+  z-index: 3;
+}
+
+.song_item_img {
+  width: 180px;
+  height: 180px;
+}
+
+.homepageSongs_play_icon {
+  position: relative;
+  left: 60px;
+  bottom: 140px;
+}
+
+@media (max-width: 1224px) {
+  .song_item_img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .song__item {
+    width: 160px;
+    height: 160px;
+  }
+
+  .homepageSongs_play_icon {
+  left: 55px;
+  bottom: 130px;
+}
+}
+
+@media (max-width: 1079px) {
+  .song_item_img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .song__item {
+    width: 140px;
+    height: 140px;
+  }
+
+  .homepageSongs_play_icon {
+    left: 45px;
+    bottom: 120px;
+  }
+}
+
+.song_name {
+  padding: 5px 0;
+  font-size: 14px;
 }
 
 .mySlides {

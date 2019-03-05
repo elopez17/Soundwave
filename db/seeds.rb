@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 require 'open-uri'
+include CloudinaryHelper
 
 User.destroy_all
 Song.destroy_all
@@ -39,22 +40,116 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/jantrax-sunset.mp3"))
   song.photo.attach(io: file, filename: 'jantrax-sunset.jpg')
   song.audio.attach(io: audio_file, filename: 'jantrax-sunset.mp3')
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+      height: 60,
+      width: 644,
+      flags: "waveform",
+      resource_type: "video",
+      background: "#ffffff",
+      color: "#f50"
+    })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[0], song_id: song.id, song_timestamp: 0,
     body: "Sunset by jantrax | https://soundcloud.com/jantr4x Music promoted by https://www.free-stock-music.com Creative Commons Attribution 3.0 Unported License https://creativecommons.org/licenses/by/3.0/deed.en_US");
+  comment = Comment.create(user_id: user_ids[1], song_id: song.id, song_timestamp: 5,
+    body: "This is a nice song");
+  comment = Comment.create(user_id: user_ids[2], song_id: song.id, song_timestamp: 8,
+    body: "Great rythm to it!");
+  
+  song = Song.create(user_id: user_ids[0], genre: 'hip-hop', name: 'home alone')
+  file = File.open(File.join(Rails.root, "/app/assets/images/jantrax-home-alone.jpg"))
+  audio_file = File.open(File.join(Rails.root, "/app/assets/audio/jantrax-home-alone.mp3"))
+  song.photo.attach(io: file, filename: 'jantrax-home-alone.jpg')
+  song.audio.attach(io: audio_file, filename: 'jantrax-home-alone.mp3')
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+      height: 60,
+      width: 644,
+      flags: "waveform",
+      resource_type: "video",
+      background: "#ffffff",
+      color: "#f50"
+    })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
+  comment = Comment.create(user_id: user_ids[0], song_id: song.id, song_timestamp: 0,
+    body: "Home Alone by jantrax | https://soundcloud.com/jantr4x Music promoted by https://www.free-stock-music.com Creative Commons Attribution 3.0 Unported License https://creativecommons.org/licenses/by/3.0/deed.en_US");
+  comment = Comment.create(user_id: user_ids[3], song_id: song.id, song_timestamp: 5,
+    body: "Cool beats");
+  comment = Comment.create(user_id: user_ids[4], song_id: song.id, song_timestamp: 8,
+    body: "One of my favorite tracks");
+  
+  song = Song.create(user_id: user_ids[0], genre: 'lo-fi', name: 'late')
+  file = File.open(File.join(Rails.root, "/app/assets/images/barradeen-late.jpg"))
+  audio_file = File.open(File.join(Rails.root, "/app/assets/audio/barradeen-late.mp3"))
+  song.photo.attach(io: file, filename: 'barradeen-late.jpg')
+  song.audio.attach(io: audio_file, filename: 'barradeen-late.mp3')
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+      height: 60,
+      width: 644,
+      flags: "waveform",
+      resource_type: "video",
+      background: "#ffffff",
+      color: "#f50"
+    })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
+  comment = Comment.create(user_id: user_ids[0], song_id: song.id, song_timestamp: 0,
+    body: "late by Barradeen | https://soundcloud.com/barradeen Music promoted by https://www.free-stock-music.com Creative Commons Attribution-ShareAlike 3.0 Unported https://creativecommons.org/licenses/by-sa/3.0/deed.en_US");
+  comment = Comment.create(user_id: user_ids[5], song_id: song.id, song_timestamp: 5,
+    body: "Always coming out with great content!");
+  comment = Comment.create(user_id: user_ids[6], song_id: song.id, song_timestamp: 8,
+    body: "This track is awesome");
+  
   
   song = Song.create(user_id: user_ids[1], genre: 'hip-hop', name: "L’envol Du Papillon") 
   file = File.open(File.join(Rails.root, "/app/assets/images/friendzoned-l-envol-du-papillon.jpg"))
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/friendzoned-l-envol-du-papillon.mp3"))
   song.photo.attach(io: file, filename: 'friendzoned-l-envol-du-papillon.jpg')
   song.audio.attach(io: audio_file, filename: 'friendzoned-l-envol-du-papillon.mp3')
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[1], song_id: song.id, song_timestamp: 0,
     body: "L’envol Du Papillon by [friendzoned] | https://soundcloud.com/friendzonedbeats Music promoted by https://www.free-stock-music.com Creative Commons Attribution-ShareAlike 3.0 Unported https://creativecommons.org/licenses/by-sa/3.0/deed.en_US");
-  
+      
   song = Song.create(user_id: user_ids[2], genre: "blues", name: "Degenerate Blues") 
   file = File.open(File.join(Rails.root, "/app/assets/images/alexander-nakarada-degenerate-blues.jpg"))
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/alexander-nakarada-degenerate-blues.mp3"))
   song.photo.attach(io: file, filename: "alexander-nakarada-degenerate-blues.jpg")
   song.audio.attach(io: audio_file, filename: "alexander-nakarada-degenerate-blues.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[2], song_id: song.id, song_timestamp: 0,
     body: "Degenerate Blues by Alexander Nakarada | https://www.serpentsoundstudios.com Music promoted by https://www.free-stock-music.com Attribution 4.0 International (CC BY 4.0) https://creativecommons.org/licenses/by/4.0/");
   
@@ -63,6 +158,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/serge-narcissoff-badlands.mp3"))
   song.photo.attach(io: file, filename: "serge-narcissoff-badlands.jpg")
   song.audio.attach(io: audio_file, filename: "serge-narcissoff-badlands.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[3], song_id: song.id, song_timestamp: 0,
     body: "Badlands by Serge Narcissoff | https://soundcloud.com/sergenarcissoff Music promoted by https://www.free-stock-music.com Creative Commons Attribution-ShareAlike 3.0 Unported https://creativecommons.org/licenses/by-sa/3.0/deed.en_US");
   
@@ -71,6 +179,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/jantrax-insomnia.mp3"))
   song.photo.attach(io: file, filename: "jantrax-insomnia.jpg")
   song.audio.attach(io: audio_file, filename: "jantrax-insomnia.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[4], song_id: song.id, song_timestamp: 0,
     body: "Insomnia by jantrax | https://soundcloud.com/jantr4x Music promoted by https://www.free-stock-music.com Creative Commons Attribution-ShareAlike 3.0 Unported https://creativecommons.org/licenses/by-sa/3.0/deed.en_US");
   
@@ -79,6 +200,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/alexander-nakarada-beat-thee.mp3"))
   song.photo.attach(io: file, filename: "alexander-nakarada-beat-thee.jpg")
   song.audio.attach(io: audio_file, filename: "alexander-nakarada-beat-thee.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[5], song_id: song.id, song_timestamp: 0,
     body: "Beat Thee by Alexander Nakarada | https://www.serpentsoundstudios.com Music promoted by https://www.free-stock-music.com Attribution 4.0 International (CC BY 4.0) https://creativecommons.org/licenses/by/4.0/");
   
@@ -87,6 +221,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/luke-stott-hardline.mp3"))
   song.photo.attach(io: file, filename: "luke-stott-hardline.jpg")
   song.audio.attach(io: audio_file, filename: "luke-stott-hardline.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[6], song_id: song.id, song_timestamp: 0,
     body: "Hardline by Luke Stott & Saul Munro | https://soundcloud.com/lukestott Music promoted by https://www.free-stock-music.com Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0) https://creativecommons.org/licenses/by-nd/4.0/");
   
@@ -95,6 +242,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/tubebackr-you-know.mp3"))
   song.photo.attach(io: file, filename: "tubebackr-you-know.jpg")
   song.audio.attach(io: audio_file, filename: "tubebackr-you-know.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[7], song_id: song.id, song_timestamp: 0,
     body: "You Know by tubebackr | https://soundcloud.com/tubebackr Music promoted by https://www.free-stock-music.com Attribution-NoDerivs 3.0 Unported (CC BY-ND 3.0) https://creativecommons.org/licenses/by-nd/3.0/");
   
@@ -103,6 +263,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/general-vibe-miss-emeli.mp3"))
   song.photo.attach(io: file, filename: "general-vibe-miss-emeli.jpg")
   song.audio.attach(io: audio_file, filename: "general-vibe-miss-emeli.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[8], song_id: song.id, song_timestamp: 0,
     body: "Miss Emeli by General Vibe | https://soundcloud.com/generalvibe Music promoted by https://www.free-stock-music.com Creative Commons Attribution 3.0 Unported License https://creativecommons.org/licenses/by/3.0/deed.en_US");
   
@@ -111,6 +284,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/barradeen-not-for-me.mp3"))
   song.photo.attach(io: file, filename: "barradeen-not-for-me.jpg")
   song.audio.attach(io: audio_file, filename: "barradeen-not-for-me.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[9], song_id: song.id, song_timestamp: 0,
     body: "not for me by Barradeen | https://soundcloud.com/barradeen Music promoted by https://www.free-stock-music.com Creative Commons Attribution-ShareAlike 3.0 Unported https://creativecommons.org/licenses/by-sa/3.0/deed.en_US");
   
@@ -119,6 +305,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/leonell-cassio-ft-dylan-emmetlie-lie-2-you.mp3"))
   song.photo.attach(io: file, filename: "leonell-cassio-ft-dylan-emmetlie-lie-2-you.jpg")
   song.audio.attach(io: audio_file, filename: "leonell-cassio-ft-dylan-emmetlie-lie-2-you.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[10], song_id: song.id, song_timestamp: 0,
     body: "Lie 2 You by Leonell Cassio ft. Dylan Emmet | https://soundcloud.com/leonellcassio Music promoted by https://www.free-stock-music.com Creative Commons Attribution-ShareAlike 3.0 Unported https://creativecommons.org/licenses/by-sa/3.0/deed.en_US");
   
@@ -127,6 +326,19 @@ ActiveRecord::Base.transaction do
   audio_file = File.open(File.join(Rails.root, "/app/assets/audio/jantrax-take-it-easy.mp3"))
   song.photo.attach(io: file, filename: "jantrax-take-it-easy.jpg")
   song.audio.attach(io: audio_file, filename: "jantrax-take-it-easy.mp3")
+  uploaded = Cloudinary::Uploader.upload(song.audio.service_url, resource_type: :video)
+  img = cl_image_tag(uploaded["public_id"] + ".png", {
+    height: 60,
+    width: 644,
+    flags: "waveform",
+    resource_type: "video",
+    background: "#ffffff",
+    color: "#f50"
+  })
+  waveform = img[(img.index("src=") + 5)..-1];
+  waveform = waveform[0...waveform.index("\" ")]
+  song.waveform = waveform
+  song.save!
   comment = Comment.create(user_id: user_ids[11], song_id: song.id, song_timestamp: 0,
     body: "Take It Easy by jantrax | https://soundcloud.com/jantr4x Music promoted by https://www.free-stock-music.com Creative Commons Attribution 3.0 Unported License https://creativecommons.org/licenses/by/3.0/deed.en_US");
 

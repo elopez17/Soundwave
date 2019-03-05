@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { closeModal, openModal } from '../../actions/modal_actions';
 import { receiveErrors, clearErrors } from '../../actions/session_actions';
 
-const msp = (state) => ({
+const mapStateToProps = (state) => ({
   errors: state.errors.session,
   formType: 'signup',
 });
 
-const mdp = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   closeModal: () => dispatch(closeModal()),
   openModal: (payload) => dispatch(openModal(payload)),
   receiveErrors: (errors) => dispatch(receiveErrors(errors)),
@@ -69,4 +69,4 @@ class SignupForm extends React.Component {
   }
 }
 
-export default connect(msp, mdp)(SignupForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
