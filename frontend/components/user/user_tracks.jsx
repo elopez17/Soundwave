@@ -69,10 +69,10 @@ class UserTracks extends React.Component {
     if (this._isMounted === false){
       return {};
     }
-    if (this.props.player.url === url) {
+    if (this.props.player.url === url && this.refs["track_line" + id]) {
       let progress = Math.floor(
-        this.props.player.played *
-          this.refs["track_line" + id].offsetWidth);
+        this.props.player.played * this.refs["track_line" + id].offsetWidth
+      );
       this.refs["track_bar" + id].style.left = progress.toString() + "px";
     } else {
       if (this.refs["pauseIcon" + id] && this.refs["playIcon" + id]) {

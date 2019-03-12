@@ -207,8 +207,6 @@
   position: relative;
   top: 10px;
   align-self: start;
-  text-overflow: ellipsis;
-  overflow: hidden;
   white-space: nowrap;
 }
 
@@ -216,14 +214,34 @@
   color: #f50;
   font-size: 12px;
   padding: 5px;
+  position: relative;
+  bottom: 2px;
 }
 
 .comments_bar_body {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: #333;
   font-size: 12px;
-  padding: 5px;
-  height: 20px;
-  max-width: 650px;
+  max-width: 500px;
+}
+
+.comments_bar_body:hover {
+  cursor: pointer;
+  white-space: normal;
+}
+
+@media (max-width: 1239px) {
+  .comments_bar_body {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 1079px) {
+  .comments_bar_body {
+    max-width: 310px;
+  }
 }
 
 .comments_bar_input_background {

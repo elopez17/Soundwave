@@ -55,7 +55,6 @@ class CommentsBar extends React.Component {
     let result = {author: null, body: null}
     let ids = this.props.commentIds;
     let comments = this.props.comments;
-    console.log("ids: ",ids)
 
     for (let i = 0; i < ids.length; i++){
       if (comments[ids[i]].song_timestamp > second) {

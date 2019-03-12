@@ -11,6 +11,7 @@ import {
 import HomepageContainer from './home/homepage_container';
 import Modal from './modal/modal';
 import UserPageContainer from './user/user_page_container';
+import CollectionContainer from "./collection";
 import SongUploadContainer from './song/upload_container';
 import HeaderBar from './header/header';
 import WebPlayer from './player';
@@ -24,6 +25,7 @@ const App = () => (
       <AuthRoute exact path='/' component={HomepageContainer}/>
       <Route exact path='/users/:userId' component={UserPageContainer} />
       <ProtectedRoute exact path='/users/:userId/upload' component={SongUploadContainer} />
+      <ProtectedRoute exact path='/users/:userId/collection' component={CollectionContainer} />
       <Redirect to='/' />
     </Switch>
     <WebPlayer />
