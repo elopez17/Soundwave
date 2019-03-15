@@ -8,6 +8,7 @@ import {
 import merge from "lodash/merge";
 
 const defaultState = {
+  id: null,
   url: null,
   playing: false,
   volume: 0.8,
@@ -22,7 +23,7 @@ const playerReducer = (state = defaultState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case PLAY_SONG:
-      return merge({}, state, {url: action.audio, playing: true});
+      return merge({}, state, {url: action.audio, id: action.id, playing: true});
     case PAUSE_SONG:
       return merge({}, state, {playing: false});
     case DURATION:

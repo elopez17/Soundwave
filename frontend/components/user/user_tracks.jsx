@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  playSong: (url) => dispatch(playSong(url)),
+  playSong: (url, id) => dispatch(playSong(url, id)),
   pauseSong: () => dispatch(pauseSong()),
 });
 
@@ -50,7 +50,7 @@ class UserTracks extends React.Component {
   handlePlay(url, id){
     return (e) => {
       e.stopPropagation();
-      this.props.playSong(url);
+      this.props.playSong(url, id);
       this.refs["playIcon" + id].style.display = "none";
       this.refs["pauseIcon" + id].style.display = "inline-block";
     };

@@ -17,7 +17,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchSongs: () => dispatch(fetchSongs()),
   fetchSong: (songId) => dispatch(fetchSong(songId)),
-  playSong: (audio) => dispatch(playSong(audio)),
+  playSong: (audio, id) => dispatch(playSong(audio, id)),
   pauseSong: () => dispatch(pauseSong()),
 });
 
@@ -41,19 +41,20 @@ class HomepageSongs extends React.Component {
         (this.props.player.playing === false ||
           this.props.player.url !== url)) {
         this.refs["playIcon"+idx].style.display = "inline-block";
+        this.refs["pauseIcon"+idx].style.display = "none";
       } else {
         this.refs["playIcon"+idx].style.display = "none";
       }
     };
   }
 
-  handleClick(idx, url){
+  handleClick(idx, url, id){
     return (e) => {
       e.stopPropagation();
       for (let i = 0; i < 12; i++){
         this.refs["pauseIcon"+i].style.display = "none"
       }
-      this.props.playSong(url);
+      this.props.playSong(url, id);
       this.refs["playIcon"+idx].style.display = "none";
       this.refs["pauseIcon"+idx].style.display = "inline-block"
     };
@@ -72,7 +73,7 @@ class HomepageSongs extends React.Component {
       songItems.push(
         <div
           key={i}
-          onClick={this.handleClick(i, this.props.songs[ids[i]].audio)}
+          onClick={this.handleClick(i, this.props.songs[ids[i]].audio, ids[i])}
           onMouseEnter={this.handleHover(true, i, this.props.songs[ids[i]].audio)}
           onMouseLeave={this.handleHover(false, i, this.props.songs[ids[i]].audio)}
           className="song__item" >

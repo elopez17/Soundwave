@@ -4,8 +4,9 @@ export const DURATION = "DURATION";
 export const PROGRESS = "PROGRESS";
 export const END_SONG = "END_SONG";
 
-export const playSong = audio => ({
+export const playSong = (audio, id) => ({
   type: PLAY_SONG,
+  id,
   audio
 });
 

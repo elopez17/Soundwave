@@ -28,10 +28,16 @@ class CommentsBar extends React.Component {
     this.getComment = this.getComment.bind(this);
     this.updateComments = this.updateComments.bind(this);
     this.keyPress = this.keyPress.bind(this);
+    this._isMounted = false;
   }
 
   componentDidMount(){
+    this._isMounted = true;
     this.updateComments();
+  }
+  
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   updateComments(){
@@ -88,7 +94,7 @@ class CommentsBar extends React.Component {
   }
 
   render(){
-    if (this.props.playing === false){
+    if (this.props.playing === false || !this._isMounted){
       return null;
     }
     let second = this.props.player.played * this.props.player.duration;

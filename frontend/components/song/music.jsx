@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  playSong: audio => dispatch(playSong(audio)),
+  playSong: (audio, id) => dispatch(playSong(audio, id)),
   pauseSong: () => dispatch(pauseSong())
 });
 
@@ -48,7 +48,7 @@ class MusicContainer extends React.Component {
     return (e) => {
       e.stopPropagation();
       this.props.songs.map(song => this.refs["pauseIcon" + song.id].style.display = "none");
-      this.props.playSong(url);
+      this.props.playSong(url, id);
       this.refs["playIcon" + id].style.display = "none";
       this.refs["pauseIcon" + id].style.display = "inline-block";
     };

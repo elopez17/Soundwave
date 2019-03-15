@@ -90,7 +90,6 @@
 .music_grid > div > img {
   width: 179px;
   height: 179px;
-  border-radius: 50%;
   background: linear-gradient(135deg, #846170, #70929c);
 }
 
@@ -147,10 +146,22 @@
 }
 
 .collection_genre {
+  
+}
+
+.collection_genre > #talkbubble {
   color: white;
   background-color: #f50;
   padding: 5px;
   font-size: 16px;
   font-weight: 100;
   text-align: center;
+}
+
+.collection_genre > #talkbubble:not(:first-child) {
+  margin: 70px 0px 30px 30px;
+}
+
+.collection_genre > #talkbubble:first-child {
+  margin: 50px 0px 30px 30px;
 }
