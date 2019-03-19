@@ -30,8 +30,7 @@ class HomepageSongs extends React.Component {
 
   componentDidMount(){
     if (Object.keys(this.props.songs).length < 12){
-      this.props.fetchSongs()
-        .then(res => console.log(this.props.songs));
+      this.props.fetchSongs();
     }
   }
 

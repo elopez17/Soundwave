@@ -28,21 +28,14 @@ class UserPageContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if (nextState.user.id !== this.state.user.id ||
-      nextProps.match.params.userId !== this.props.match.params.userId ||
-      nextState.user.photoURL !== this.state.user.photoURL ||
-      nextProps.comments !== this.props.comments ||
-      nextState.user !== this.state.user) {
+    if (nextProps.comments !== this.props.comments ||
+      nextProps.match.params.userId !== this.props.match.params.userId) {
+      this.getUserInfo(nextProps.match.params.userId);
+    }
+    if (nextState.user !== this.state.user) {
       return true;
     }
     return false;
-  }
-
-  componentDidUpdate(prevProps){
-    if (prevProps.match.params.userId !== this.props.match.params.userId ||
-      prevProps.comments !== this.props.comments) {
-      this.getUserInfo(this.props.match.params.userId);
-    }
   }
 
   getUserInfo(userId){

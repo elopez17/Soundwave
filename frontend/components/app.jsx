@@ -24,6 +24,7 @@ const App = () => (
     <Switch>
       <AuthRoute exact path='/' component={HomepageContainer}/>
       <Route exact path='/users/:userId' component={UserPageContainer} />
+      <Route exact path='/collection' component={CollectionContainer} />
       <ProtectedRoute exact path='/users/:userId/upload' component={SongUploadContainer} />
       <ProtectedRoute exact path='/users/:userId/collection' component={CollectionContainer} />
       <Redirect to='/' />

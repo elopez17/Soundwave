@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomepageSongs from './homepage_songs';
+import SearchBar from '../search';
 
 class Homepage extends React.Component {
   constructor(props){
@@ -96,14 +97,10 @@ class Homepage extends React.Component {
             <br />
           </div>
         </div>
-        <input
-          className="homepage-search-bar"
-          type="text"
-          placeholder="Search for artists, bands, tracks"
-        />
         <img
           className="search__icon homepage--search--icon"
           src="/sprite-sheet.png" />
+        <SearchBar className="homepage-search-bar" />
         <div className="homepage__songs__title">
           Hear the best from the Soundwave community
         </div>

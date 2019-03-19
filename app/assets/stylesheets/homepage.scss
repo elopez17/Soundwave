@@ -115,29 +115,34 @@
   background-color: white;
 }
 
+#homepage-container .suggest_search {
+  width: 590px;
+  position: relative;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
 .homepage--search--icon {
   margin-top: 65px;
-  margin-left: 200px;
+  left: calc(50% + 220px);
+  z-index: 1;
+}
+
+.homepage--search--icon:hover {
+  cursor: pointer;
 }
 
 @media (max-width: 1224px) {
   #homepage-container {
     width: 1080px;
   }
-
-  .homepage--search--icon {
-    margin-left: 130px;
-  }
 }
 
 @media (max-width: 1079px) {
-      #homepage-container {
-        width: 960px;
-      }
-
-      .homepage--search--icon {
-        margin-left: 75px;
-      }
+  #homepage-container {
+    width: 960px;
+  }
 }
 
 .homepage-search-bar {

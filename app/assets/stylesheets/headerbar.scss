@@ -64,12 +64,45 @@ ul.header-bar>li {
 
 .header-search-bar {
   width: 90%;
-  height: 20px;
-  box-sizing: border-box;
   position: relative;
-  bottom: 5px;
-  padding-left: 10px;
+  bottom: 7px;
+  padding: 5px 10px;
   border-radius: 5px;
-  background-color: #ccc;
+  background-color: #e5e5e5;
   font-size: 16px;
+  border: none;
+}
+
+.header_search_pos:hover {
+  cursor: pointer;
+}
+
+.header_search_pos {
+  left: 385px;
+  top: 13px;
+}
+
+@media (max-width: 1239px) {
+  .header_search_pos {
+    left: 323px;
+  }
+}
+
+@media (max-width: 1079px) {
+  .header_search_pos {
+    left: 280px;
+  }
+}
+
+.suggest_search {
+  background-color: rgb(17, 17, 17);
+  height: 40px;
+  line-height: 40px;
+  padding-left: 30px;
+  text-align: start;
+  color: #bbb;
+}
+
+.suggest_search:hover {
+  background-color: #333;
 }
