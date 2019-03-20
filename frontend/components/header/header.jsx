@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { logout } from '../../actions/session_actions';
+import { logout, login } from '../../actions/session_actions';
+import { openModal } from "../../actions/modal_actions";
 import SearchBar from '../search';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.id,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
+  openModal: payload => dispatch(openModal(payload)),
+  login: user => dispatch(login(user)),
 });
 
 class Header extends React.Component {
@@ -18,6 +21,7 @@ class Header extends React.Component {
     this.redirectHome = this.redirectHome.bind(this);
     this.redirectCollection = this.redirectCollection.bind(this);
     this.redirectUpload = this.redirectUpload.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   redirectHome(){
@@ -37,7 +41,11 @@ class Header extends React.Component {
   }
 
   redirectUpload() {
-    this.props.history.push(`/users/${this.props.currentUser}/upload`);
+    if (this.props.currentUser !== null) {
+      this.props.history.push(`/users/${this.props.currentUser}/upload`);
+    } else {
+      this.props.openModal({ modal: "signin", email: "" });
+    }
   }
 
   getFunction(li){
@@ -45,10 +53,26 @@ class Header extends React.Component {
       if (li === "Upload") {
         return li;
       } else if (li === "Sign out") {
-        
+        return li;
       }
     } else {
-      
+      if (li === "Upload") {
+        return <span className="header_bar_signin" >
+          Sign in
+            </span>;
+      } else if (li === "Sign out") {
+        return <span className="header_bar_create" >
+          Create account
+            </span>;
+      }
+    }
+  }
+
+  signOut(){
+    if (this.props.currentUser !== null) {
+      this.props.logout().then(() => this.props.history.push("/"));
+    } else {
+      this.props.openModal({ modal: "signup", email: "" });
     }
   }
 
@@ -72,7 +96,7 @@ class Header extends React.Component {
             src="/sprite-sheet.png" />
         </li>
         <li style={upload} onClick={this.redirectUpload}>{this.getFunction("Upload")}</li>
-        <li onClick={() => this.props.logout().then(() => this.props.history.push('/'))}>{this.getFunction("Sign out")}</li>
+        <li onClick={this.signOut}>{this.getFunction("Sign out")}</li>
       </ul>
       </div>
       </div>
