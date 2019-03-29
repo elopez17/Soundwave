@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { logout, login } from '../../actions/session_actions';
 import { openModal } from "../../actions/modal_actions";
-import SearchBar from '../search';
+import SearchBar from '../search_bar';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.id,

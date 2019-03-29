@@ -3,113 +3,177 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getSongsArr } from '../selectors/songs';
 import { getUsersArr } from '../selectors/users';
-import { fetchUsers } from '../actions/user_actions';
-import { fetchSongs } from '../actions/song_actions';
+import { playSong, pauseSong } from "../actions/player_actions";
+import CommentsBar from "./user/comments_bar";
 
 const mapStateToProps = state => ({
   songs: getSongsArr(state),
-  users: getUsersArr(state)
+  users: getUsersArr(state),
+  player: state.ui.player
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchUsers: () => dispatch(fetchUsers()),
-  fetchSongs: () => dispatch(fetchSongs())
+  playSong: (url, id) => dispatch(playSong(url, id)),
+  pauseSong: () => dispatch(pauseSong())
 });
 
-const genres = [
-  "blues",
-  "electronic",
-  "hip-hop",
-  "jazz",
-  "lo-fi",
-  "piano",
-  "pop",
-  "rap",
-  "rock",
-  "r&b"
-];
-
-class SearchBar extends React.Component {
+class SearchContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      filter: "",
-      focused: false
+      searchTab: null
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    if (!this.props.location.state) {
+      this.props.location.state = { filter: "" };
+    }
+    this.handlePause = this.handlePause.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
+    this.moveBar = this.moveBar.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this)
+    this._isMounted = false;
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.props.player !== nextProps.player ||
+      this.props.location.state.filter !== nextProps.location.state.filter ||
+      this.state.searchTab !== nextState.searchTab) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   componentDidMount(){
-    this.props.fetchSongs();
-    this.props.fetchUsers();
+    this._isMounted = true;
+    this.setState({ searchTab: "everything"});
   }
 
-  handleChange(e){
-    this.setState({filter: e.target.value});
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
-  handleClick(str){
+  isSelected(tabName){
+    if (this.state.searchTab === tabName) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  handlePlay(url, id) {
     return (e) => {
       e.stopPropagation();
-      this.setState({ filter: str, focused: false });
-      if (genres.includes(str)){
-        this.props.history.push(`/search`, { genre: str });
-      } else {
-        let matched = this.props.songs.filter(song => song.name === str)
-        if (matched.length > 0){
-          this.props.history.push(`/users/${matched[0].user_id}`);
-        } else {
-          matched = this.props.users.filter(user => user.username === str);
-          this.props.history.push(`/users/${matched[0].id}`);
-        }
-      }
+      this.props.playSong(url, id);
+      this.refs["playIcon" + id].style.display = "none";
+      this.refs["pauseIcon" + id].style.display = "inline-block";
     };
   }
 
-  suggestSearch(filter){
-    let results = [];
+  handlePause(id) {
+    return (e) => {
+      e.stopPropagation();
+      this.props.pauseSong();
+      this.refs["pauseIcon" + id].style.display = "none";
+      this.refs["playIcon" + id].style.display = "inline-block";
+    };
+  }
 
-    if (filter.length < 1 || !this.state.focused){
-      return null;
+  moveBar(url, id) {
+    if (this._isMounted === false) {
+      return {};
     }
-    for (let i = 0; i < genres.length; i++){
-      if (genres[i].includes(filter)){
-        results.push(genres[i]);
+    if (this.props.player.url === url && this.refs["track_line" + id]) {
+      let progress = Math.floor(
+        this.props.player.played * this.refs["track_line" + id].offsetWidth
+      );
+      this.refs["track_bar" + id].style.left = progress.toString() + "px";
+    } else {
+      if (this.refs["pauseIcon" + id] && this.refs["playIcon" + id]) {
+        this.refs["pauseIcon" + id].style.display = "none";
+        this.refs["playIcon" + id].style.display = "inline-block";
       }
+      return { left: "0px" };
     }
-    let songs = this.props.songs.filter(song =>
-      song.name.toLowerCase().includes(filter)
-    );
-    let users = this.props.users.filter(user =>
-      user.username.toLowerCase().includes(filter)
-    );
-    songs.map(song => results.push(song.name))
-    users.map(user => results.push(user.username))
-    results = results.slice(0, 10);
-    return results.map((str, i) => (
-      <div key={i} className="suggest_search"
-        onClick={this.handleClick(str)}>
-        {str}
-      </div>
-    ));
+    return {};
+  }
+
+  handleRedirect(userId) {
+    return (e) => {
+      e.stopPropagation();
+      this.props.history.push(`/users/${userId}`);
+    };
+  }
+
+  placeResults(){
+    let songs = [];
+    let users = [];
+    let filter = this.props.location.state.filter.toLowerCase();
+
+    if (this.state.searchTab === "tracks" || this.state.searchTab === "everything") {
+      songs = this.props.songs.filter(song => song.name.toLowerCase().includes(filter))
+    }
+    if (this.state.searchTab === "people" || this.state.searchTab === "everything") {
+      users = this.props.users.filter(user => user.username.toLowerCase().includes(filter))
+    }
+    return (
+    <div>
+    {
+      songs.map(song => (
+        <div className="track_container" key={song.id}>
+          <img width="160" height="160" src={song.photoURL} />
+          <span className="track_info_container">
+            <span onClick={this.handlePlay(song.audio, song.id)} className="play__icon tracks_play_icon" ref={"playIcon" + song.id} />
+            <span onClick={this.handlePause(song.id)} className="pause_icon tracks_play_icon" style={{ display: "none" }} ref={"pauseIcon" + song.id}></span>
+            <span className="track_username text">user name<br /></span>
+            <span className="track_name text">{song.name}</span>
+            <img className="track_waveform waveform_img" src={song.waveform} />
+            <span className="track_waveform track_line" ref={"track_line" + song.id} />
+            <span className="track_waveform track_bar" ref={"track_bar" + song.id} style={this.moveBar(song.audio, song.id)} />
+            <CommentsBar songId={song.id} commentIds={song.comments} playing={song.audio === this.props.player.url} />
+          </span>
+        </div>
+      ))
+    }
+    {
+      users.map(user => (
+        <div className="search_user text" onClick={this.handleRedirect(user.id)} key={user.id}>
+          <img src={user.photoURL} />
+          <div>{user.username}</div>
+        </div>
+      ))
+    }
+    </div>);
   }
 
   render(){
     return (
-      <span className="search_wrapper">
-        <input
-          className={this.props.className}
-          type="text"
-          placeholder="Search for artists, bands, tracks"
-          onChange={this.handleChange}
-          value={this.state.filter}
-          onFocus={() => this.setState({ focused: true })}
-        />
-        {this.suggestSearch(this.state.filter.toLowerCase())}
-      </span>
+      <div className="search_page text">
+        <div className="search_page_title">
+          Search Results for "{this.props.location.state.filter}"
+        </div>
+        <div id="search_page_grid">
+          <ul id="search_tabs">
+            <li className={this.isSelected("everything") ? "active" : ""}
+              onClick={() => this.setState({ searchTab: "everything"})}>
+              <img src="search_icon_white.png" className="size_30" />
+              <div>Everything</div>
+            </li>
+            <li className={this.isSelected("tracks") ? "active" : ""}
+              onClick={() => this.setState({ searchTab: "tracks" })}>
+              <img src="soundwave_icon_white.jpg" className="size_30" />
+              <div>Tracks</div>
+            </li>
+            <li className={this.isSelected("people") ? "active" : ""}
+              onClick={() => this.setState({ searchTab: "people" })}>
+              <img src="person_icon.png" className="size_30" />
+              <div>People</div>
+            </li>
+          </ul>
+          {this.placeResults()}
+        </div>
+      </div>
     );
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBar));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchContainer));

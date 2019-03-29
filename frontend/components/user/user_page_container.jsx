@@ -21,10 +21,16 @@ class UserPageContainer extends React.Component {
     super(props);
     this.state = {user: {id: null, username: '', songs: [], photoURL: '', photoFile: null}};
     this.getFile = this.getFile.bind(this);
+    this._isMounted = false;
   }
 
   componentDidMount(){
+    this._isMounted = true;
     this.getUserInfo(this.props.match.params.userId);
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -43,8 +49,10 @@ class UserPageContainer extends React.Component {
       .then(res => {
         this.props.fetchSongsByUser(res.user.id)
           .then(res2 => {
-            res.user.songs = Object.values(res2.songs);
-            this.setState({ user: res.user });
+            if (this._isMounted){
+              res.user.songs = Object.values(res2.songs);
+              this.setState({ user: res.user });
+            }
           });
       });
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomepageSongs from './homepage_songs';
-import SearchBar from '../search';
+import SearchBar from '../search_bar';
 
 class Homepage extends React.Component {
   constructor(props){

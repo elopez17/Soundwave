@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { postSong, getWaveform } from '../../util/song_api_util';
 import { playSong, pauseSong } from '../../actions/player_actions';
 import CommentsBar from './comments_bar';
 
