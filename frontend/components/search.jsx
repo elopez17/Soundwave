@@ -9,6 +9,7 @@ import CommentsBar from "./user/comments_bar";
 const mapStateToProps = state => ({
   songs: getSongsArr(state),
   users: getUsersArr(state),
+  usersObj: state.entities.users,
   player: state.ui.player
 });
 
@@ -124,7 +125,7 @@ class SearchContainer extends React.Component {
           <span className="track_info_container">
             <span onClick={this.handlePlay(song.audio, song.id)} className="play__icon tracks_play_icon" ref={"playIcon" + song.id} />
             <span onClick={this.handlePause(song.id)} className="pause_icon tracks_play_icon" style={{ display: "none" }} ref={"pauseIcon" + song.id}></span>
-            <span className="track_username text">user name<br /></span>
+            <span className="track_username text">{this.props.usersObj[song.user_id].username}<br /></span>
             <span className="track_name text">{song.name}</span>
             <img className="track_waveform waveform_img" src={song.waveform} />
             <span className="track_waveform track_line" ref={"track_line" + song.id} />

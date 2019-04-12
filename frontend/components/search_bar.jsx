@@ -99,13 +99,13 @@ class SearchBar extends React.Component {
     results = results.slice(0, 10);
     if (results.length > 0) {
       return results.map((str, i) => (
-        <div key={i} className="suggest_search"
+        <div key={i} className="suggest_search text"
           onClick={this.handleClick(str)}>
           {str}
         </div>
       ));
     } else {
-      return <div className="suggest_search"
+      return <div className="suggest_search text"
         onClick={() => this.keyPress({keyCode: 13})}>
         Search for "{this.state.filter}"
       </div>

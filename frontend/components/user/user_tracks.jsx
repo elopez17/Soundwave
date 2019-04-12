@@ -50,8 +50,6 @@ class UserTracks extends React.Component {
     return (e) => {
       e.stopPropagation();
       this.props.playSong(url, id);
-      this.refs["playIcon" + id].style.display = "none";
-      this.refs["pauseIcon" + id].style.display = "inline-block";
     };
   }
 
@@ -59,8 +57,6 @@ class UserTracks extends React.Component {
     return (e) => {
       e.stopPropagation();
       this.props.pauseSong();
-      this.refs["pauseIcon" + id].style.display = "none";
-      this.refs["playIcon" + id].style.display = "inline-block";
     };
   }
 
@@ -83,6 +79,17 @@ class UserTracks extends React.Component {
     return {};
   }
 
+  iconShow(icon, songId) {
+    const { player } = this.props;
+
+    if (icon === "play") {
+      return { display: (!player.playing || songId !== player.id ? "inline-block" : "none") };
+    } else if (icon === "pause") {
+      return { display: (player.playing && songId === player.id ? "inline-block" : "none") };
+    }
+    return {};
+  }
+
   render() {
     let tracks = this.props.songs;
     let uploadButton = null;
@@ -93,7 +100,7 @@ class UserTracks extends React.Component {
     if (tracks.length < 1){
       return (
         <div className="user-show-tracks no_tracks text">
-          <img src="/soundwave-folder.png" width="250" height="250"/>
+          <img src="/soundwave.png" width="600" height="250"/>
           <div id="no_tracks_caption">Seems a little quiet over here</div>
           {uploadButton}
         </div>
@@ -106,12 +113,12 @@ class UserTracks extends React.Component {
         <div className="track_container" key={song.id}>
           <img width="160" height="160" src={song.photoURL} />
           <span className="track_info_container">
-            <span onClick={this.handlePlay(song.audio, song.id)} className="play__icon tracks_play_icon" ref={"playIcon" + song.id} />
-            <span onClick={this.handlePause(song.id)} className="pause_icon tracks_play_icon" style={{display:"none"}} ref={"pauseIcon" + song.id}></span>
+            <span onClick={this.handlePlay(song.audio, song.id)} className="play__icon tracks_play_icon" style={this.iconShow("play", song.id)} ref={"playIcon" + song.id} />
+            <span onClick={this.handlePause(song.id)} className="pause_icon tracks_play_icon" style={this.iconShow("pause", song.id)} ref={"pauseIcon" + song.id}></span>
             <span className="track_username text">{this.props.username}<br /></span>
             <span className="track_name text">{song.name}</span>
             <img className="track_waveform waveform_img" src={song.waveform} />
-                <span className="track_waveform track_line" ref={"track_line" + song.id} />
+            <span className="track_waveform track_line" ref={"track_line" + song.id} />
             <span className="track_waveform track_bar" ref={"track_bar" + song.id} style={this.moveBar(song.audio, song.id)}/>
             <CommentsBar songId={song.id} commentIds={song.comments} playing={song.audio === this.props.player.url} />
           </span>

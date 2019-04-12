@@ -12,6 +12,7 @@
   align-self: flex-start;
   z-index: 1;
   text-decoration: none;
+  letter-spacing: 2px;
 }
 
 .homepage-signin {
@@ -55,7 +56,6 @@
   border-radius: 3px;
   font-size: 14px;
   font-weight: 100;
-  font-family: sans-serif;
   border: none;
 }
 
@@ -69,12 +69,11 @@
   border-radius: 3px;
   font-size: 13px;
   font-weight: 100;
-  font-family: sans-serif;
 }
 
 .slideText {
   color: white;
-  grid-column: 2;
+  grid-column: 1 / 4;
   grid-row: 2;
   justify-self: center;
   position: relative;
@@ -101,6 +100,7 @@
   background-color: black;
   width: inherit;
   height: 450px;
+  overflow: hidden;
   border-top: 5px solid #f50;
   margin: 0 auto;
 }
@@ -114,6 +114,13 @@
   background-color: white;
 }
 
+#homepage-container > span {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 5;
+}
+
 #homepage-container .suggest_search {
   width: 590px;
   position: relative;
@@ -125,14 +132,14 @@
 .homepage--search--icon {
   margin-top: 65px;
   left: calc(50% + 220px);
-  z-index: 1;
+  z-index: 6;
 }
 
 .homepage--search--icon:hover {
   cursor: pointer;
 }
 
-@media (max-width: 1224px) {
+@media (max-width: 1239px) {
   #homepage-container {
     width: 1080px;
   }
@@ -186,6 +193,7 @@
 .homepage__songs__title {
   position: relative;
   top: 100px;
+  margin-top: 60px;
   text-align: center;
   font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
   font-size: 24px;
@@ -219,11 +227,11 @@
 
 .homepageSongs_play_icon {
   position: relative;
-  left: 60px;
-  bottom: 140px;
+  left: 65px;
+  bottom: 160px;
 }
 
-@media (max-width: 1224px) {
+@media (max-width: 1239px) {
   .song_item_img {
     width: 160px;
     height: 160px;
@@ -235,8 +243,8 @@
   }
 
   .homepageSongs_play_icon {
-  left: 55px;
-  bottom: 130px;
+  left: 60px;
+  bottom: 150px;
 }
 }
 
@@ -252,14 +260,21 @@
   }
 
   .homepageSongs_play_icon {
-    left: 45px;
-    bottom: 120px;
+    left: 50px;
+    bottom: 140px;
   }
 }
 
 .song_name {
-  padding: 5px 0;
+  padding: 7px 0;
   font-size: 14px;
+  font-weight: 100;
+}
+
+.song_username {
+  color: #999;
+  font-weight: 100;
+  font-size: 12px;
 }
 
 .mySlides {

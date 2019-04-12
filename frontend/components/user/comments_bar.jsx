@@ -63,6 +63,9 @@ class CommentsBar extends React.Component {
     let comments = this.props.comments;
 
     for (let i = 0; i < ids.length; i++){
+      if (!comments[ids[i]]) {
+        continue;
+      }
       if (comments[ids[i]].song_timestamp > second) {
         return result;
       }

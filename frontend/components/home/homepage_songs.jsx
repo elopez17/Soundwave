@@ -11,6 +11,7 @@ import {
 
 const mapStateToProps = (state, ownProps) => ({
   songs: state.entities.songs,
+  users: state.entities.users,
   player: state.ui.player,
 });
 
@@ -50,43 +51,50 @@ class HomepageSongs extends React.Component {
   handleClick(idx, url, id){
     return (e) => {
       e.stopPropagation();
-      for (let i = 0; i < 12; i++){
-        this.refs["pauseIcon"+i].style.display = "none"
-      }
       this.props.playSong(url, id);
       this.refs["playIcon"+idx].style.display = "none";
-      this.refs["pauseIcon"+idx].style.display = "inline-block"
     };
+  }
+
+  iconShow(icon, songId){
+    const { player } = this.props;
+    
+    if (icon === "play") {
+      return { display: "none" };
+    } else if (icon === "pause") {
+      return { display: (player.playing && songId === player.id ? "inline-block" : "none") };
+    }
+    return {};
   }
 
   render(){
     let songItems = [];
     let songImg = null;
     let ids = Object.keys(this.props.songs);
+    const { songs } = this.props;
     
     if (ids.length < 12){
       return null;
     }
     for (let i=0; i < 12; i++){
-      songImg = <img className="song_item_img" src={this.props.songs[ids[i]].photoURL} />
+      songImg = <img className="song_item_img" src={songs[ids[i]].photoURL} />
       songItems.push(
         <div
           key={i}
-          onClick={this.handleClick(i, this.props.songs[ids[i]].audio, ids[i])}
-          onMouseEnter={this.handleHover(true, i, this.props.songs[ids[i]].audio)}
-          onMouseLeave={this.handleHover(false, i, this.props.songs[ids[i]].audio)}
+          onClick={this.handleClick(i, songs[ids[i]].audio, ids[i])}
+          onMouseEnter={this.handleHover(true, i, songs[ids[i]].audio)}
+          onMouseLeave={this.handleHover(false, i, songs[ids[i]].audio)}
           className="song__item" >
           {songImg}
-          <div className="text song_name">{this.props.songs[ids[i]].name}</div>
-          <span className="play__icon homepageSongs_play_icon" style={{display:"none"}} ref={"playIcon"+i} />
-          <span className="pause_icon homepageSongs_play_icon" style={{display:"none"}} ref={"pauseIcon"+i}
+          <div className="text song_name">{songs[ids[i]].name}</div>
+          <div className="text song_username">{this.props.users[songs[ids[i]].user_id].username}</div>
+          <span className="play__icon homepageSongs_play_icon" style={this.iconShow("play", parseInt(ids[i], 10))} ref={"playIcon"+i} />
+          <span className="pause_icon homepageSongs_play_icon" style={this.iconShow("pause", parseInt(ids[i], 10))} ref={"pauseIcon"+i}
             onClick={(e) => {
               e.stopPropagation();
               this.props.pauseSong();
-              this.refs["pauseIcon"+i].style.display = "none"
-              this.refs["playIcon"+i].style.display = "inline-block";
             }}/>
-          </div>
+        </div>
       );
     }
     return (

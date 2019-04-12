@@ -44,13 +44,20 @@ class GenresContainer extends React.Component {
   handleClick(id, url) {
     return (e) => {
       e.stopPropagation();
-      if (this.refs["pauseIcon" + this.props.player.id]){
-        this.refs["pauseIcon" + this.props.player.id].style.display = "none";
-      }
       this.props.playSong(url, id);
       this.refs["playIcon" + id].style.display = "none";
-      this.refs["pauseIcon" + id].style.display = "inline-block";
     };
+  }
+
+  iconShow(icon, songId) {
+    const { player } = this.props;
+
+    if (icon === "play") {
+      return { display: "none" };
+    } else if (icon === "pause") {
+      return { display: (player.playing && songId === player.id ? "inline-block" : "none") };
+    }
+    return {};
   }
 
   formatSongs(songs){
@@ -63,14 +70,12 @@ class GenresContainer extends React.Component {
               onMouseLeave={this.handleHover(false, song.id, song.audio)}>
             <img src={song.photoURL}/>
             <div>{song.name}</div>
-            <span className="play__icon music_play_pause" style={{ display: "none" }} ref={"playIcon" + song.id}
+            <span className="play__icon music_play_pause" style={this.iconShow("play", song.id)} ref={"playIcon" + song.id}
               onClick={this.handleClick(song.id, song.audio)} />
-            <span className="pause_icon music_play_pause" style={{ display: "none" }} ref={"pauseIcon" + song.id}
+            <span className="pause_icon music_play_pause" style={this.iconShow("pause", song.id)} ref={"pauseIcon" + song.id}
               onClick={(e) => {
                 e.stopPropagation();
                 this.props.pauseSong();
-                this.refs["pauseIcon" + song.id].style.display = "none";
-                this.refs["playIcon" + song.id].style.display = "inline-block";
               }} />
           </div>
         ))

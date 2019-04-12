@@ -55,24 +55,16 @@ class Homepage extends React.Component {
             <img src="/band.jpeg" height="450" style={{ display: "inline" }} width="55%" />
           </span>
 
-          <Link className="homepage-logo" to="/">
+          <Link className="homepage-logo text" to="/">
             <h4>SOUNDWAVE</h4>
           </Link>
-          <div className="homepage-signin">
-            <button
-              className="homepage-signin-btn"
-              onClick={() =>
-                this.props.openModal({ modal: "signin", email: "" })
-              }
-            >
+          <div className="homepage-signin text">
+            <button className="homepage-signin-btn"
+                onClick={() => this.props.openModal({ modal: "signin", email: "" })}>
               Sign in
             </button>
-            <button
-              className="homepage-create-btn"
-              onClick={() =>
-                this.props.openModal({ modal: "signup", email: "" })
-              }
-            >
+            <button className="homepage-create-btn"
+                onClick={() => this.props.openModal({ modal: "signup", email: "" })}>
               Create account
             </button>
             <button className="homepage-demo-btn" onClick={this.handleDemo}>

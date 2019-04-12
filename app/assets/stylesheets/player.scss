@@ -1,0 +1,226 @@
+#player_container {
+  width: 100%;
+  height: 48px;
+  position: fixed;
+  bottom: 0px;
+  z-index: 5;
+  background-color: #f2f2f2;
+  border-top: 1px solid #cecece;
+}
+
+.react_player {
+  width: 1240px;
+  height: 48px;
+  position: relative;
+  margin: 0 auto;
+}
+
+@media (max-width: 1239px) {
+  .react_player {
+    width: 1080px;
+  }
+}
+
+@media (max-width: 1079px) {
+  .react_player {
+    width: 960px;
+  }
+}
+
+
+
+.react_player > img:hover {
+  cursor: pointer;
+}
+
+#player_rewind {
+  position: absolute;
+  clip: rect(90px, 270px, 120px, 240px);
+  bottom: -75px;
+  left: -205px;
+}
+
+#player_play {
+  position: absolute;
+  clip: rect(90px, 360px, 120px, 330px);
+  bottom: -75px;
+  left: -260px;
+}
+
+#player_pause {
+  position: absolute;
+  clip: rect(90px, 390px, 120px, 360px);
+  bottom: -75px;
+  left: -290px;
+}
+
+#player_skip {
+  position: absolute;
+  clip: rect(90px, 510px, 120px, 480px);
+  bottom: -75px;
+  left: -377px;
+}
+
+#player_repeat {
+  position: absolute;
+  clip: rect(30px, 330px, 60px, 300px);
+  bottom: -138px;
+  left: -150px;
+}
+
+#player_repeat_on {
+  position: absolute;
+  display: none;
+  left: 150px;
+  top: 13px;
+  height: 18px;
+}
+
+.react_player > div {
+  display: inline-block;
+}
+
+#time_elapsed {
+  position: relative;
+  left: 210px;
+  margin-left: 40px;
+  color: #f50;
+  font-size: 11px;
+  line-height: 45px;
+}
+
+#progress_bar {
+  width: 512px;
+  height: 1px;
+  position: relative;
+  left: 220px;
+  bottom: 3px;
+  background-color: #ccc;
+}
+
+@media (max-width: 1239px) {
+  #progress_bar {
+    width: 352px;
+  }
+}
+@media (max-width: 1079px) {
+  #progress_bar {
+    width: 252px;
+  }
+
+  #time_elapsed {
+    margin-left: 20px;
+  }
+}
+
+#elapsed_bar {
+  height: 1px;
+  background-color: #f50;
+}
+
+#duration {
+  position: relative;
+  left: 230px;
+  font-size: 11px;
+  line-height: 45px;
+}
+
+#volume_high {
+  position: absolute;
+  clip: rect(30px, 540px, 60px, 510px);
+  bottom: -137px;
+  right: 290px;
+}
+
+#volume_low {
+  position: absolute;
+  clip: rect(30px, 510px, 60px, 480px);
+  bottom: -139px;
+  right: 260px;
+}
+
+#volume_mute {
+  position: absolute;
+  clip: rect(30px, 480px, 60px, 450px);
+  bottom: -139px;
+  right: 230px;
+}
+
+#player_song_img {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  left: 325px;
+  top: 7px;
+}
+
+#player_song_img:hover {
+  cursor: default;
+}
+
+#player_username {
+  position: relative;
+  left: 340px;
+  bottom: 10px;
+  font-size: 11px;
+  color: #999;
+}
+
+#player_song_name {
+  position: absolute;
+  left: 970px;
+  top: 25px;
+  font-size: 11px;
+  color: #666;
+}
+
+@media (max-width: 1239px) {
+  #player_song_name {
+    left: 812px;
+  }
+}
+
+@media (max-width: 1079px) {
+  #player_song_name {
+    left: 692px;
+  }
+}
+
+#volume_slider {
+  display: none;
+  width: 30px;
+  height: 120px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 345px;
+  top: -117px;
+  background-color: #f2f2f2;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+#triangle-down {
+  position: relative;
+  top: 119px;
+  left: 4px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #c2c2c2;
+}
+
+#volume_bar {
+  height: 92px;
+  width: 2px;
+  background-color: #ccc;
+  margin-left: 14px;
+}
+
+#volume_level {
+  background-color: #f50;
+  width: 2px;
+  position: absolute;
+  bottom: 16px;
+  height: 73px;
+}
