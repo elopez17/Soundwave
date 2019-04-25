@@ -91,7 +91,7 @@ class UserTracks extends React.Component {
   }
 
   render() {
-    let tracks = this.props.songs;
+    let tracks = this.props.songs ? this.props.songs : [];
     let uploadButton = null;
 
     if (this.props.userId === this.props.sessionId) {

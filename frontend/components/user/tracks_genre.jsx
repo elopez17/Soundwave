@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TracksGenre = ({songs}) => {
+const TracksGenre = ({songs = []}) => {
   return (
   <div className="user-show-sidebar">
   {

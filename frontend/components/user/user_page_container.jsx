@@ -19,7 +19,11 @@ const mapDispatchToProps = dispatch => ({
 class UserPageContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {user: {id: null, username: '', songs: [], photoURL: '', photoFile: null}};
+    this.state = {
+      user: {
+        id: null, username: '', songs: [], photoURL: '', photoFile: null
+      }
+    };
     this.getFile = this.getFile.bind(this);
     this._isMounted = false;
   }
@@ -50,7 +54,7 @@ class UserPageContainer extends React.Component {
         this.props.fetchSongsByUser(res.user.id)
           .then(res2 => {
             if (this._isMounted){
-              res.user.songs = Object.values(res2.songs);
+              res.user.songs = Object.values(res2.songs ? res2.songs : {});
               this.setState({ user: res.user });
             }
           });
