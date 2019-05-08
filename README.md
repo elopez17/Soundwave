@@ -2,7 +2,7 @@
 
 Soundwave is a music streaming app in which users can publish songs.
 
-[Soundwave Heroku](https://soundwave-app.herokuapp.com/?#/)
+Live Site: [Soundwave](https://soundwave-app.herokuapp.com/?#/)
 
 Technologies involved:
 ---
