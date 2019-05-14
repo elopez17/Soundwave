@@ -10,6 +10,7 @@ Technologies involved:
 * ruby on rails
 * postgresql
 * html/css
+* AWS S3
 
 ### login and sign-up forms
 ---
