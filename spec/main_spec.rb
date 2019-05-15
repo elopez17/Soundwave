@@ -1,5 +1,4 @@
 require 'rspec'
-require 'spec_helper'
 
 
 describe "main" do
