@@ -6,10 +6,11 @@ Live Site: [Soundwave](https://soundwave-app.herokuapp.com/?#/)
 
 Technologies involved:
 ---
-* react-redux
-* ruby on rails
-* postgresql
-* html/css
+* Ruby on Rails
+* AWS S3
+* Postgres
+* React-Redux
+* HTML/CSS
 
 ### login and sign-up forms
 ---
@@ -54,9 +55,3 @@ const Modal = ({ modal, closeModal, clearErrors }) => {
   );
 };
 ```
-
-
-#### Future product development
-* users can follow other users
-* users can publish and stream songs
-* users can comment on songs
