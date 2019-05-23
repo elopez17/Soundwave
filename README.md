@@ -11,6 +11,7 @@ Technologies involved:
 * Postgres
 * React-Redux
 * HTML/CSS
+* RSpec
 
 ### login and sign-up forms
 ---
