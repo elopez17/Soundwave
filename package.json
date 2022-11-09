@@ -39,6 +39,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "react-scripts": "^2.1.8"
+    "react-scripts": "^5.0.1"
   }
 }
